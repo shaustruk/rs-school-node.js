@@ -1,7 +1,9 @@
-import path from 'path';
-import * as process from 'process';
-import * as readline from 'readline';
-import { fileURLToPath, os } from './index.mjs';
+import {
+  fileURLToPath,
+  os,
+  path,
+  readline,
+} from './index.mjs';
 
 export const rl = readline.createInterface({
   input: process.stdin,
@@ -19,4 +21,6 @@ export const messages = {
   goodbye: 'Thank you for using File Manager',
   infoCurrentDir: 'You are currently in',
   infoHomeDir: 'You are currently in',
+  invalidEnter:
+    'Invalid input! Please enter true command "npm start -- --username=YOUR_NAME"',
 };

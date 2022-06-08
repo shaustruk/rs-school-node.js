@@ -5,24 +5,30 @@ import {
 export const closeApp = (userName) => {
   rl.on('line', (userCommand) => {
     if (userCommand === '.exit') {
-      rl.question('Exit (y or n)? ', (input) => {
-        if (input.match(/^y(es)?$/i)) {
-          console.log(
-            `${messages.goodbye}, ${userName}!`
-          );
-          rl.pause();
+      rl.question(
+        '\x1b[31m Exit (y or n)? ',
+        (input) => {
+          if (input.match(/^y(es)?$/i)) {
+            console.log(
+              `\x1b[36m ${messages.goodbye}, ${userName}!`
+            );
+            rl.pause();
+          }
         }
-      });
+      );
     }
   });
   rl.on('SIGINT', () => {
-    rl.question('Exit (y or n)? ', (input) => {
-      if (input.match(/^y(es)?$/i)) {
-        console.log(
-          `${messages.goodbye}, ${userName}!`
-        );
-        rl.pause();
+    rl.question(
+      '\x1b[31m Exit (y or n)? ',
+      (input) => {
+        if (input.match(/^y(es)?$/i)) {
+          console.log(
+            `\x1b[36m ${messages.goodbye}, ${userName}!`
+          );
+          rl.pause();
+        }
       }
-    });
+    );
   });
 };

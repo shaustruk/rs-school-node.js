@@ -5,6 +5,6 @@ import {
 
 export const showHomeDir = () => {
   return console.log(
-    `${messages.infoHomeDir}: ${homeDir}`
+    `\x1b[32m ${messages.infoHomeDir}: ${homeDir}`
   );
 };

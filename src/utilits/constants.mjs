@@ -21,6 +21,12 @@ export const rootDir = path.parse(__dirname);
 
 export const osUserName = os.userInfo().username;
 
+export const systemCpuCores = os.cpus();
+
+export const EOL = os.EOL;
+
+export const cpuArch = process.arch;
+
 export const messages = {
   greeting: 'Welcome to the File Manager',
   goodbye: 'Thank you for using File Manager',
@@ -32,11 +38,19 @@ export const messages = {
     'Invalid input! Please enter true command "npm start -- --username=YOUR_NAME"',
   enterCommand: 'Please, enter command:',
   invalidCommand:
-    'Invalid.input. This team doesn"t exist',
+    'Invalid.input. This command doesn"t exist',
   fallsDirName: 'This folder does not exist...',
   listFilesCurrentDir:
     'The list filenames & dir:',
   userNameOS: 'The main user is:',
+  cpuInfo: 'The host machine CPUs:',
+  eolInfo:
+    'Default system End-Of-Line for windows it is \\r\\n',
+  cpuArchInfo:
+    'CPU architecture for which the Node.js binary was compiled',
+  errorPath:
+    'Invalid input. This path is not correct',
+  changeDir: 'The current dir was changed',
 };
 
 export let listFolders = [

@@ -20,6 +20,8 @@ import {
   rl,
 } from '../utilits/constants.mjs';
 
+const continuation = () => {};
+
 export const activity = () => {
   showCurrentDir();
   rl.question(
@@ -36,11 +38,14 @@ export const activity = () => {
           listIntroDir();
           activity();
           break;
+        case 'cd':
+          changeDir(args[0]);
+          activity();
+          break;
         case 'os':
           switch (args[0]) {
             case '--homedir':
               showHomeDir();
-              activity();
               break;
             case '--username':
               showUserNameOS();
@@ -58,18 +63,7 @@ export const activity = () => {
               showArchCpu();
               activity();
               break;
-
-            default:
-              console.log(
-                '\x1b[31m',
-                messages.invalidCommand
-              );
-              activity();
-              break;
           }
-        case 'cd':
-          changeDir(args[0]);
-          activity();
           break;
         default:
           console.log(

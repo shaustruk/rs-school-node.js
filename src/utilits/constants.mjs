@@ -38,7 +38,7 @@ export const messages = {
     'Invalid input! Please enter true command "npm start -- --username=YOUR_NAME"',
   enterCommand: 'Please, enter command:',
   invalidCommand:
-    'Invalid.input. This command doesn"t exist',
+    'Invalid input. This command doesn"t exist',
   fallsDirName: 'This folder does not exist...',
   listFilesCurrentDir:
     'The list filenames & dir:',

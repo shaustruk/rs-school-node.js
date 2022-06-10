@@ -4,6 +4,11 @@ import * as path from 'path';
 import * as os from 'os';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
+import * as crypto from 'crypto';
+import {
+  rename as rn,
+  access,
+} from 'fs/promises';
 export {
   process,
   readline,
@@ -11,4 +16,7 @@ export {
   os,
   fileURLToPath,
   fs,
+  rn,
+  access,
+  crypto,
 };

@@ -19,6 +19,7 @@ import {
   showHomeDir,
   showUserNameOS,
 } from '../os/index.js';
+import { calculateHash } from '../transform/index.mjs';
 
 import {
   messages,
@@ -70,7 +71,18 @@ export const activity = () => {
               showArchCpu();
               activity();
               break;
+            default:
+              console.log(
+                '\x1b[31m',
+                messages.invalidCommand
+              );
+              activity();
+              break;
           }
+          break;
+        case 'hash':
+          calculateHash(args[0]);
+          activity();
           break;
         case 'cat':
           readFile(args[0]);

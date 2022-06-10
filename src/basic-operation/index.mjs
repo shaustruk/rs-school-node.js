@@ -1,5 +1,9 @@
 import { messages } from '../utilits/constants.mjs';
-import { fs, path } from '../utilits/index.mjs';
+import {
+  fs,
+  path,
+  rn,
+} from '../utilits/index.mjs';
 
 function handler() {
   console.log(messages.errorPath);
@@ -11,8 +15,10 @@ export const createFile = (fileName) => {
       process.cwd(),
       fileName
     );
-    let writeStream =
-      fs.createWriteStream(fileName);
+    let writeStream = fs.createWriteStream(
+      destFile,
+      { flag: 'wx+' }
+    );
     writeStream.on('close', () => {
       process.stdout.write('\n');
     });
@@ -53,7 +59,32 @@ export const readFile = async (pathfile) => {
 export const renameFile = (
   pathFile,
   newfileName
-) => {};
+) => {
+  try {
+    const currentPathFile = path.join(
+      process.cwd(),
+      pathFile
+    );
+    const newPathFile = path.join(
+      process.cwd(),
+      newfileName
+    );
+    access(
+      currentPathFile,
+      constants.R_OK | constants.W_OK,
+      (err) => {
+        if (err) {
+          rn(currentPathFile, newPathFile);
+        } else {
+          console.error(messages.failed, '1');
+        }
+      }
+    );
+  } catch (err) {
+    rn(currentPathFile, newPathFile);
+    console.error(messages.failed, '2');
+  }
+};
 
 export const copyFile = (
   pathCurrentFile,

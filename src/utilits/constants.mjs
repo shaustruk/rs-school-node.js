@@ -52,6 +52,7 @@ export const messages = {
   errorPath:
     'Invalid input. This path is not correct',
   changeDir: 'The current dir was changed',
+  infoHash: 'The hash is created:',
 };
 
 export let listFolders = [

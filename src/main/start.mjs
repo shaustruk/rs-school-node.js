@@ -2,6 +2,7 @@ import { entrance, userName } from './enter.js';
 import { activity } from './activity.mjs';
 import { messages } from '../utilits/constants.mjs';
 import { os } from '../utilits/index.mjs';
+import { showCurrentDir } from '../fs/index.mjs';
 
 export const args = process.argv;
 

@@ -32,7 +32,7 @@ export const messages = {
   goodbye: 'Thank you for using File Manager',
   infoRootDir:
     "It's the root folder! You have to stop",
-  infoCurrentDir: 'You are currently in',
+  infoCurrentDir: 'You are currently in: ',
   infoHomeDir: 'Your home dir is: ',
   invalidEnter:
     'Invalid input! Please enter true command "npm start -- --username=YOUR_NAME"',

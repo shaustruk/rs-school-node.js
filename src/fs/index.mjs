@@ -3,11 +3,9 @@
 import { messages } from '../utilits/constants.mjs';
 import { path } from '../utilits/index.mjs';
 
-export const showCurrentDir = () => {
+export const showCurrentDir = (path) => {
   console.log(
-    `\x1b[36m ${
-      messages.infoCurrentDir
-    }: ${process.cwd()}`
+    `\x1b[36m ${messages.infoCurrentDir}: ${path}`
   );
 };
 

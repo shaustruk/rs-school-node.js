@@ -1,8 +1,13 @@
 //!!absolut path=>    C:\Users\katerina\Desktop
 import {
-  changeDir,
-  showCurrentDir,
-} from '../fs/index.js';
+  copyFile,
+  createFile,
+  deleteFile,
+  moveFile,
+  readFile,
+  renameFile,
+} from '../basic-operation/index.mjs';
+import { changeDir } from '../fs/index.mjs';
 import {
   goUpperDir,
   listIntroDir,
@@ -20,12 +25,13 @@ import {
   rl,
 } from '../utilits/constants.mjs';
 
-const continuation = () => {};
-
 export const activity = () => {
-  showCurrentDir();
   rl.question(
-    `\x1b[36m ${messages.enterCommand + '\n'}`,
+    `\x1b[36m ${
+      messages.infoCurrentDir +
+      process.cwd() +
+      '\n'
+    }`,
     (line) => {
       const [command, ...args] = line.split(' ');
       switch (command) {
@@ -46,6 +52,7 @@ export const activity = () => {
           switch (args[0]) {
             case '--homedir':
               showHomeDir();
+              activity();
               break;
             case '--username':
               showUserNameOS();
@@ -64,6 +71,30 @@ export const activity = () => {
               activity();
               break;
           }
+          break;
+        case 'cat':
+          readFile(args[0]);
+          activity();
+          break;
+        case 'add':
+          createFile(args[0]);
+          activity();
+          break;
+        case 'rn':
+          renameFile(args[0], args[1]);
+          activity();
+          break;
+        case 'cp':
+          copyFile(args[0], args[1]);
+          activity();
+          break;
+        case 'mv':
+          moveFile(args[0], args[1]);
+          activity();
+          break;
+        case 'rm':
+          deleteFile(args[0], args[1]);
+          activity();
           break;
         default:
           console.log(

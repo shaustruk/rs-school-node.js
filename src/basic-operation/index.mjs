@@ -5,7 +5,26 @@ function handler() {
   console.log(messages.errorPath);
 }
 
-export const createFile = (fileName) => {};
+export const createFile = (fileName) => {
+  try {
+    const destFile = path.join(
+      process.cwd(),
+      fileName
+    );
+    let writeStream =
+      fs.createWriteStream(fileName);
+    writeStream.on('close', () => {
+      process.stdout.write('\n');
+    });
+    writeStream.on('error', () => {
+      handler();
+    });
+  } catch (err) {
+    if (err) {
+      console.error(`${messages.failed}`);
+    }
+  }
+};
 
 export const readFile = async (pathfile) => {
   try {
@@ -26,7 +45,7 @@ export const readFile = async (pathfile) => {
     });
   } catch (err) {
     if (err) {
-      console.error('FS operation failed');
+      console.error(`${messages.failed}`);
     }
   }
 };

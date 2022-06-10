@@ -39,6 +39,7 @@ export const messages = {
   enterCommand: 'Please, enter command:',
   invalidCommand:
     'Invalid input. This command doesn"t exist',
+  failed: 'Operation failed',
   fallsDirName: 'This folder does not exist...',
   listFilesCurrentDir:
     'The list filenames & dir:',

@@ -5,6 +5,7 @@ import {
   fs,
   path,
   rn,
+  unlink,
 } from '../utilits/index.mjs';
 
 function handler() {
@@ -90,4 +91,16 @@ export const moveFile = (
   pathDestinDirect
 ) => {};
 
-export const deleteFile = (pathDestinFile) => {};
+export const deleteFile = async (
+  pathDestinFile
+) => {
+  try {
+    await unlink(
+      path.join(process.cwd(), pathDestinFile)
+    );
+    console.log(messages.deleteInfo);
+  } catch (error) {
+    console.error(messages.errorPath);
+  }
+  activity();
+};

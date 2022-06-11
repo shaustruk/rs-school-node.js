@@ -53,4 +53,5 @@ export const messages = {
     'Invalid input. This path is not correct',
   changeDir: 'The current dir was changed',
   infoHash: 'The hash is created:',
+  deleteInfo: 'The file was deleted!',
 };

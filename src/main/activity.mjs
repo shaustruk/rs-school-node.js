@@ -94,7 +94,6 @@ export const activity = () => {
           break;
         case 'rn':
           renameFile(args[0], args[1]);
-          // activity();
           break;
         case 'cp':
           copyFile(args[0], args[1]);
@@ -106,7 +105,6 @@ export const activity = () => {
           break;
         case 'rm':
           deleteFile(args[0], args[1]);
-          activity();
           break;
         default:
           console.log(

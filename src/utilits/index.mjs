@@ -8,6 +8,7 @@ import * as crypto from 'crypto';
 import {
   rename as rn,
   access,
+  unlink,
 } from 'fs/promises';
 export {
   process,
@@ -19,4 +20,5 @@ export {
   rn,
   access,
   crypto,
+  unlink,
 };

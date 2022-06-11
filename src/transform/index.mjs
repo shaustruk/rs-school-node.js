@@ -25,9 +25,6 @@ export const calculateHash = async (
       hash.update(data);
     } else {
       secret = hash.digest('hex');
-      console.log(
-        `${messages.infoHash} ${secret}`
-      );
     }
   });
   stream.on('end', () => {

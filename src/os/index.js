@@ -33,7 +33,9 @@ export const showCPUInfo = () => {
 
 export const showEOL = () => {
   console.log(
-    `\x1b[36m ${messages.eolInfo} + ${EOL}`
+    `\x1b[36m ${messages.eolInfo}${JSON.stringify(
+      EOL
+    )}`
   );
 };
 

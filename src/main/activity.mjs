@@ -94,7 +94,7 @@ export const activity = () => {
           break;
         case 'rn':
           renameFile(args[0], args[1]);
-          activity();
+          // activity();
           break;
         case 'cp':
           copyFile(args[0], args[1]);

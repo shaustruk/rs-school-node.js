@@ -46,7 +46,7 @@ export const messages = {
   userNameOS: 'The main user is:',
   cpuInfo: 'The host machine CPUs:',
   eolInfo:
-    'Default system End-Of-Line for windows it is \\r\\n',
+    'Default system End-Of-Line for your os it is: ',
   cpuArchInfo:
     'CPU architecture for which the Node.js binary was compiled',
   errorPath:
@@ -54,18 +54,3 @@ export const messages = {
   changeDir: 'The current dir was changed',
   infoHash: 'The hash is created:',
 };
-
-export let listFolders = [
-  'src',
-  'fs',
-  'main',
-  'navigate',
-  'of',
-  'os',
-  'utilits',
-  'src',
-  'rs-school-node.js-File-Manager',
-  'Desktop',
-  'katerina',
-  'Users',
-];

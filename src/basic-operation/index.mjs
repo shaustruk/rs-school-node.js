@@ -1,5 +1,7 @@
+import { activity } from '../main/activity.mjs';
 import { messages } from '../utilits/constants.mjs';
 import {
+  access,
   fs,
   path,
   rn,
@@ -15,10 +17,8 @@ export const createFile = (fileName) => {
       process.cwd(),
       fileName
     );
-    let writeStream = fs.createWriteStream(
-      destFile,
-      { flag: 'wx+' }
-    );
+    let writeStream =
+      fs.createWriteStream(destFile);
     writeStream.on('close', () => {
       process.stdout.write('\n');
     });
@@ -56,7 +56,7 @@ export const readFile = async (pathfile) => {
   }
 };
 
-export const renameFile = (
+export const renameFile = async (
   pathFile,
   newfileName
 ) => {
@@ -65,25 +65,19 @@ export const renameFile = (
       process.cwd(),
       pathFile
     );
+    const arrPath = pathFile.split('/');
+    const prevPath = arrPath
+      .slice(0, -1)
+      .join('/');
     const newPathFile = path.join(
-      process.cwd(),
+      prevPath,
       newfileName
     );
-    access(
-      currentPathFile,
-      constants.R_OK | constants.W_OK,
-      (err) => {
-        if (err) {
-          rn(currentPathFile, newPathFile);
-        } else {
-          console.error(messages.failed, '1');
-        }
-      }
-    );
+    await rn(currentPathFile, newPathFile);
   } catch (err) {
-    rn(currentPathFile, newPathFile);
-    console.error(messages.failed, '2');
+    console.log(messages.failed);
   }
+  activity();
 };
 
 export const copyFile = (

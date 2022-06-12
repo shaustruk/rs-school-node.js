@@ -86,7 +86,6 @@ export const activity = () => {
           break;
         case 'cat':
           readFile(args[0]);
-          activity();
           break;
         case 'add':
           createFile(args[0]);
@@ -97,7 +96,6 @@ export const activity = () => {
           break;
         case 'cp':
           copyFile(args[0], args[1]);
-          activity();
           break;
         case 'mv':
           moveFile(args[0], args[1]);

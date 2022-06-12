@@ -8,6 +8,8 @@ import {
   unlink,
 } from '../utilits/index.mjs';
 
+let writeStream;
+let readableStream;
 function handler() {
   console.log(messages.errorPath);
 }
@@ -18,8 +20,7 @@ export const createFile = (fileName) => {
       process.cwd(),
       fileName
     );
-    let writeStream =
-      fs.createWriteStream(destFile);
+    writeStream = fs.createWriteStream(destFile);
     writeStream.on('close', () => {
       process.stdout.write('\n');
     });
@@ -39,7 +40,7 @@ export const readFile = async (pathfile) => {
       process.cwd(),
       pathfile
     );
-    let readableStream = fs.createReadStream(
+    readableStream = fs.createReadStream(
       destFile,
       'utf8'
     );
@@ -55,6 +56,7 @@ export const readFile = async (pathfile) => {
       console.error(`${messages.failed}`);
     }
   }
+  activity();
 };
 
 export const renameFile = async (
@@ -81,15 +83,61 @@ export const renameFile = async (
   activity();
 };
 
-export const copyFile = (
+export const copyFile = async (
   pathCurrentFile,
-  pathDestinFile
-) => {};
+  pathDestinDirect
+) => {
+  try {
+    const fileName = pathCurrentFile
+      .split('/')
+      .slice(-1)
+      .join('');
+
+    const destPath = path.join(
+      process.cwd(),
+      pathDestinDirect,
+      fileName
+    );
+    access(pathCurrentFile, fs.constants.W_OK)
+      .then(() => {
+        readableStream = fs.createReadStream(
+          pathCurrentFile,
+          'utf8'
+        );
+        readableStream.on('close', () => {
+          process.stdout.write('\n');
+        });
+        readableStream.on('error', () => {
+          handler();
+        });
+        try {
+          writeStream = fs.createWriteStream(
+            path.join(pathDestinDirect, fileName)
+          );
+          writeStream.on('error', () => {
+            console.error('Can not be accessed');
+          });
+          readableStream.pipe(writeStream);
+        } catch {
+          console.error('Can not be accessed');
+        }
+      })
+      .catch((err) =>
+        console.error('Can not be accessed')
+      );
+  } catch (err) {
+    console.log(messages.errorPath);
+  }
+  activity();
+};
 
 export const moveFile = (
   pathCurrentFile,
   pathDestinDirect
-) => {};
+) => {
+  try {
+  } catch {}
+};
 
 export const deleteFile = async (
   pathDestinFile

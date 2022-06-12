@@ -55,4 +55,5 @@ export const messages = {
   infoHash: 'The hash is created:',
   deleteInfo: 'The file was deleted!',
   compressInfo: 'The file was compressed',
+  decompressInfo: 'The file was decompressed',
 };

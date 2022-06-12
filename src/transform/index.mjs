@@ -99,4 +99,63 @@ export const compressBrotli = async (
   activity();
 };
 
-export const decompressBrotli = async () => {};
+export const decompressBrotli = async (
+  pathToCurrentFile,
+  destinPath
+) => {
+  try {
+    fs.access(
+      pathToCurrentFile,
+      fs.constants.R_OK | fs.constants.W_OK,
+      (err) => {
+        if (err) {
+          console.log(messages.errorPath);
+        } else {
+          const pathCurrent = path.join(
+            process.cwd(),
+            pathToCurrentFile
+          );
+          const prevName = pathCurrent
+            .split('\\')
+            .slice(-1)
+            .join('');
+          const newFileName = prevName.slice(
+            0,
+            -3
+          );
+
+          console.log(newFileName);
+          const readStream =
+            fs.createReadStream(pathCurrent);
+          readStream.on('error', (err) => {
+            console.log(err, activity());
+          });
+          const writeStream =
+            fs.createWriteStream(
+              path.join(
+                process.cwd(),
+                destinPath,
+                newFileName
+              )
+            );
+          writeStream.on('error', (err) => {
+            console.log(messages.failed);
+          });
+          const brotli =
+            zlib.createBrotliDecompress();
+          const stream = readStream
+            .pipe(brotli)
+            .pipe(writeStream);
+
+          stream.on('finish', () => {
+            console.log(messages.decompressInfo),
+              unlink(pathCurrent);
+          });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(messages.failed);
+  }
+  activity();
+};

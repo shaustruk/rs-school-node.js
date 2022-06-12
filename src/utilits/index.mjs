@@ -5,6 +5,7 @@ import * as os from 'os';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import * as crypto from 'crypto';
+import * as zlib from 'zlib';
 import {
   rename as rn,
   access,
@@ -21,4 +22,5 @@ export {
   access,
   crypto,
   unlink,
+  zlib,
 };

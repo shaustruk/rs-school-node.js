@@ -12,18 +12,6 @@ let writeStream;
 
 let readableStream;
 
-let fileName;
-function handler() {
-  console.log(messages.errorPath);
-}
-
-const createFileName = (path) => {
-  return (fileName = path
-    .split('/')
-    .slice(-1)
-    .join(''));
-};
-
 export const createFile = (fileName) => {
   try {
     const destFile = path.join(

@@ -54,4 +54,5 @@ export const messages = {
   changeDir: 'The current dir was changed',
   infoHash: 'The hash is created:',
   deleteInfo: 'The file was deleted!',
+  compressInfo: 'The file was compressed',
 };

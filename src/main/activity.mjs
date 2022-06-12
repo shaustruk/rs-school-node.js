@@ -19,7 +19,11 @@ import {
   showHomeDir,
   showUserNameOS,
 } from '../os/index.js';
-import { calculateHash } from '../transform/index.mjs';
+import {
+  calculateHash,
+  compressBrotli,
+  decompressBrotli,
+} from '../transform/index.mjs';
 
 import {
   messages,
@@ -102,6 +106,12 @@ export const activity = async () => {
           break;
         case 'rm':
           deleteFile(args[0], args[1]);
+          break;
+        case 'compress':
+          compressBrotli(args[0], args[1]);
+          break;
+        case 'decompress':
+          decompressBrotli(args[0], args[1]);
           break;
         default:
           console.log(

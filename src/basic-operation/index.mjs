@@ -9,10 +9,20 @@ import {
 } from '../utilits/index.mjs';
 
 let writeStream;
+
 let readableStream;
+
+let fileName;
 function handler() {
   console.log(messages.errorPath);
 }
+
+const createFileName = (path) => {
+  return (fileName = path
+    .split('/')
+    .slice(-1)
+    .join(''));
+};
 
 export const createFile = (fileName) => {
   try {
@@ -93,11 +103,6 @@ export const copyFile = async (
       .slice(-1)
       .join('');
 
-    const destPath = path.join(
-      process.cwd(),
-      pathDestinDirect,
-      fileName
-    );
     access(pathCurrentFile, fs.constants.W_OK)
       .then(() => {
         readableStream = fs.createReadStream(
@@ -131,12 +136,50 @@ export const copyFile = async (
   activity();
 };
 
-export const moveFile = (
+export const moveFile = async (
   pathCurrentFile,
   pathDestinDirect
 ) => {
   try {
-  } catch {}
+    const fileName = pathCurrentFile
+      .split('/')
+      .slice(-1)
+      .join('');
+
+    access(pathCurrentFile, fs.constants.W_OK)
+      .then(() => {
+        readableStream = fs.createReadStream(
+          pathCurrentFile,
+          'utf8'
+        );
+        readableStream.on('close', () => {
+          process.stdout.write('\n');
+        });
+        readableStream.on('error', () => {
+          handler();
+        });
+        try {
+          writeStream = fs.createWriteStream(
+            path.join(pathDestinDirect, fileName)
+          );
+          writeStream.on('error', () => {
+            console.error('Can not be accessed');
+          });
+          readableStream.pipe(writeStream);
+          writeStream.on('close', () => {
+            unlink(pathCurrentFile);
+          });
+        } catch {
+          console.error('Can not be accessed');
+        }
+      })
+      .catch((err) =>
+        console.error('Can not be accessed')
+      );
+  } catch (err) {
+    console.log(messages.errorPath);
+  }
+  activity();
 };
 
 export const deleteFile = async (

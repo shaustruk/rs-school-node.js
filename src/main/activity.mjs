@@ -26,7 +26,7 @@ import {
   rl,
 } from '../utilits/constants.mjs';
 
-export const activity = () => {
+export const activity = async () => {
   rl.question(
     `\x1b[36m ${
       messages.infoCurrentDir +
@@ -99,7 +99,6 @@ export const activity = () => {
           break;
         case 'mv':
           moveFile(args[0], args[1]);
-          activity();
           break;
         case 'rm':
           deleteFile(args[0], args[1]);

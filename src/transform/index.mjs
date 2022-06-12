@@ -46,107 +46,112 @@ export const compressBrotli = async (
   pathToCurrentFile,
   destinPath
 ) => {
-  try {
-    fs.access(
-      pathToCurrentFile,
-      fs.constants.R_OK | fs.constants.W_OK,
-      (err) => {
-        if (err) {
-          console.log(messages.errorPath);
-        } else {
-          const pathCurrent = path.join(
-            process.cwd(),
-            pathToCurrentFile
-          );
-          const baseName =
-            path.basename(pathCurrent);
-          const newFileName = baseName + '.br';
-          const readStream =
-            fs.createReadStream(pathCurrent);
-          readStream.on('error', (err) => {
-            console.log(err, activity());
-          });
-          const writeStream =
-            fs.createWriteStream(
-              path.join(
-                process.cwd(),
-                destinPath,
-                newFileName
-              )
+  if (pathToCurrentFile && destinPath) {
+    try {
+      fs.access(
+        pathToCurrentFile,
+        fs.constants.R_OK | fs.constants.W_OK,
+        (err) => {
+          if (err) {
+            console.log(messages.errorPath);
+          } else {
+            const pathCurrent = path.join(
+              process.cwd(),
+              pathToCurrentFile
             );
-          writeStream.on('error', (err) => {
-            console.log(messages.failed);
-          });
-          const brotli =
-            zlib.createBrotliCompress();
-          const stream = readStream
-            .pipe(brotli)
-            .pipe(writeStream);
+            const baseName =
+              path.basename(pathCurrent);
+            const newFileName = baseName + '.br';
+            const readStream =
+              fs.createReadStream(pathCurrent);
+            readStream.on('error', (err) => {
+              console.log(err, activity());
+            });
+            const writeStream =
+              fs.createWriteStream(
+                path.join(
+                  process.cwd(),
+                  destinPath,
+                  newFileName
+                )
+              );
+            writeStream.on('error', (err) => {
+              console.log(messages.failed);
+            });
+            const brotli =
+              zlib.createBrotliCompress();
+            const stream = readStream
+              .pipe(brotli)
+              .pipe(writeStream);
 
-          stream.on('finish', () => {
-            console.log(messages.compressInfo),
-              unlink(pathCurrent);
-          });
+            stream.on('finish', () => {
+              console.log(messages.compressInfo),
+                unlink(pathCurrent);
+            });
+          }
         }
-      }
-    );
-  } catch (err) {
-    console.log(messages.failed);
+      );
+    } catch (err) {
+      console.log(messages.failed);
+    }
+    activity();
   }
-  activity();
 };
-
 export const decompressBrotli = async (
   pathToCurrentFile,
   destinPath
 ) => {
-  try {
-    fs.access(
-      pathToCurrentFile,
-      fs.constants.R_OK | fs.constants.W_OK,
-      (err) => {
-        if (err) {
-          console.log(messages.errorPath);
-        } else {
-          const pathCurrent = path.join(
-            process.cwd(),
-            pathToCurrentFile
-          );
-          const newFileName = path.basename(
-            pathCurrent,
-            '.br'
-          );
-          const readStream =
-            fs.createReadStream(pathCurrent);
-          readStream.on('error', (err) => {
-            console.log(err, activity());
-          });
-          const writeStream =
-            fs.createWriteStream(
-              path.join(
-                process.cwd(),
-                destinPath,
-                newFileName
-              )
+  if (pathToCurrentFile && destinPath) {
+    try {
+      fs.access(
+        pathToCurrentFile,
+        fs.constants.R_OK | fs.constants.W_OK,
+        (err) => {
+          if (err) {
+            console.log(messages.errorPath);
+          } else {
+            const pathCurrent = path.join(
+              process.cwd(),
+              pathToCurrentFile
             );
-          writeStream.on('error', (err) => {
-            console.log(messages.failed);
-          });
-          const brotli =
-            zlib.createBrotliDecompress();
-          const stream = readStream
-            .pipe(brotli)
-            .pipe(writeStream);
+            const newFileName = path.basename(
+              pathCurrent,
+              '.br'
+            );
+            const readStream =
+              fs.createReadStream(pathCurrent);
+            readStream.on('error', (err) => {
+              console.log(err, activity());
+            });
+            const writeStream =
+              fs.createWriteStream(
+                path.join(
+                  process.cwd(),
+                  destinPath,
+                  newFileName
+                )
+              );
+            writeStream.on('error', (err) => {
+              console.log(messages.failed);
+            });
+            const brotli =
+              zlib.createBrotliDecompress();
+            const stream = readStream
+              .pipe(brotli)
+              .pipe(writeStream);
 
-          stream.on('finish', () => {
-            console.log(messages.decompressInfo),
-              unlink(pathCurrent);
-          });
+            stream.on('finish', () => {
+              console.log(
+                messages.decompressInfo
+              ),
+                unlink(pathCurrent);
+            });
+          }
         }
-      }
-    );
-  } catch (err) {
-    console.log(messages.failed);
-  }
+      );
+    } catch (err) {
+      console.log(messages.failed);
+    }
+  } else messages.failed;
   activity();
 };

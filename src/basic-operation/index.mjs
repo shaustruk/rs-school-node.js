@@ -21,12 +21,19 @@ export const createFile = (fileName) => {
       process.cwd(),
       fileName
     );
-    writeStream = fs.createWriteStream(destFile);
-    writeStream.on('close', () => {
-      process.stdout.write('\n');
-    });
-    writeStream.on('error', () => {
-      handler();
+    fs.access(destFile, (err) => {
+      if (err) {
+        writeStream =
+          fs.createWriteStream(destFile);
+        writeStream.on('close', () => {
+          process.stdout.write('\n');
+        });
+        writeStream.on('error', () => {
+          handler();
+        });
+      } else {
+        console.log(messages.failed);
+      }
     });
   } catch (err) {
     if (err) {

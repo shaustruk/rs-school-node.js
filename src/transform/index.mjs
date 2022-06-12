@@ -63,7 +63,6 @@ export const compressBrotli = async (
             .slice(-1);
           prevName.push('.br');
           const newFileName = prevName.join('');
-          console.log(newFileName);
           const readStream =
             fs.createReadStream(pathCurrent);
           readStream.on('error', (err) => {
@@ -123,8 +122,6 @@ export const decompressBrotli = async (
             0,
             -3
           );
-
-          console.log(newFileName);
           const readStream =
             fs.createReadStream(pathCurrent);
           readStream.on('error', (err) => {

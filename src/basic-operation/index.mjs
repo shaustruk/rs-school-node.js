@@ -11,6 +11,9 @@ import {
 let writeStream;
 
 let readableStream;
+const handler = () => {
+  console.log(messages.errorPath);
+};
 
 export const createFile = (fileName) => {
   try {
@@ -108,18 +111,19 @@ export const copyFile = async (
             path.join(pathDestinDirect, fileName)
           );
           writeStream.on('error', () => {
-            console.error('Can not be accessed');
+            console.error(messages.enterCommand);
           });
           readableStream.pipe(writeStream);
+          console.log(messages.copyInfo);
         } catch {
-          console.error('Can not be accessed');
+          console.error(messages.failed);
         }
       })
       .catch((err) =>
-        console.error('Can not be accessed')
+        console.error(messages.failed)
       );
   } catch (err) {
-    console.log(messages.errorPath);
+    console.log(messages.failed);
   }
   activity();
 };
@@ -151,21 +155,22 @@ export const moveFile = async (
             path.join(pathDestinDirect, fileName)
           );
           writeStream.on('error', () => {
-            console.error('Can not be accessed');
+            console.error(messages.enterCommand);
           });
           readableStream.pipe(writeStream);
+          console.error(messages.moveInfo);
           writeStream.on('close', () => {
             unlink(pathCurrentFile);
           });
         } catch {
-          console.error('Can not be accessed');
+          console.error(messages.enterCommand);
         }
       })
       .catch((err) =>
-        console.error('Can not be accessed')
+        console.error(messages.failed)
       );
   } catch (err) {
-    console.log(messages.errorPath);
+    console.log(messages.failed);
   }
   activity();
 };

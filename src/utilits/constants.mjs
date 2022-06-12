@@ -56,4 +56,6 @@ export const messages = {
   deleteInfo: 'The file was deleted!',
   compressInfo: 'The file was compressed',
   decompressInfo: 'The file was decompressed',
+  copyInfo: 'The copy of file was created',
+  moveInfo: 'The file was moved',
 };

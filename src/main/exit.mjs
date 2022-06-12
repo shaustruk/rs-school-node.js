@@ -9,9 +9,6 @@ export const enterExitCommand = (userName) => {
     '\x1b[31m Exit (y or n)? ',
     (input) => {
       if (input.match(/^y(es)?$/i)) {
-        console.log(
-          `\x1b[36m ${messages.goodbye}, ${userName}!`
-        );
         rl.pause();
       } else activity();
     }

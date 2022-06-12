@@ -17,5 +17,5 @@ try {
     )
   );
 } catch (err) {
-  console.error(err);
+  console.error(messages.failed);
 }

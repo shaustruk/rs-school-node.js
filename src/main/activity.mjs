@@ -29,6 +29,7 @@ import {
   messages,
   rl,
 } from '../utilits/constants.mjs';
+import { enterExitCommand } from './exit.mjs';
 
 export const activity = async () => {
   rl.question(
@@ -40,9 +41,12 @@ export const activity = async () => {
     (line) => {
       const [command, ...args] = line.split(' ');
       switch (command) {
+        case '.exit':
+          enterExitCommand();
+          break;
         case 'up':
         case '..':
-          goUpperDir();
+          goUpperDir(args[1]);
           activity();
           break;
         case 'ls':

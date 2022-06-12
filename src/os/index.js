@@ -24,7 +24,7 @@ export const showCPUInfo = () => {
   systemCpuCores.forEach((core) => {
     console.info(
       'model:',
-      core.model.split('@')[1],
+      core.model.split('@')[0],
       'clock rate(GHz):',
       core.speed / 1000 + 'GHz'
     );

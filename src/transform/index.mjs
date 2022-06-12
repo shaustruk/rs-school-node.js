@@ -58,11 +58,9 @@ export const compressBrotli = async (
             process.cwd(),
             pathToCurrentFile
           );
-          const prevName = pathCurrent
-            .split('\\')
-            .slice(-1);
-          prevName.push('.br');
-          const newFileName = prevName.join('');
+          const baseName =
+            path.basename(pathCurrent);
+          const newFileName = baseName + '.br';
           const readStream =
             fs.createReadStream(pathCurrent);
           readStream.on('error', (err) => {
@@ -114,13 +112,9 @@ export const decompressBrotli = async (
             process.cwd(),
             pathToCurrentFile
           );
-          const prevName = pathCurrent
-            .split('\\')
-            .slice(-1)
-            .join('');
-          const newFileName = prevName.slice(
-            0,
-            -3
+          const newFileName = path.basename(
+            pathCurrent,
+            '.br'
           );
           const readStream =
             fs.createReadStream(pathCurrent);

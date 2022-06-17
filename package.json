@@ -1,0 +1,30 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "CRUD-API",
+  "main": "src/index.ts",
+  "scripts": {
+    "start:dev": "nodemon src/index.ts",
+    "start:prod": "tsc && node ./dist/index.js",
+    "build": "tsc",
+    "dev": "ts-node ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaustruk/rs-school-node.js.git"
+  },
+  "author": "ShaustrukE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaustruk/rs-school-node.js/issues"
+  },
+  "homepage": "https://github.com/shaustruk/rs-school-node.js#readme",
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

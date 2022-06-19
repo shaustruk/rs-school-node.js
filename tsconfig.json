@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
     "target": "es5",
-    "outDir": "dist",
+     "outDir": "src/dist",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
   },
   "ts-node": {
     "esm": true

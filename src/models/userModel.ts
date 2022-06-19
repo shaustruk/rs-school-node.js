@@ -25,3 +25,16 @@ export const create = (user: IUSER) => {
     resolve(newUser);
   });
 };
+
+export const update = (
+  id: string,
+  user: IUSER
+) => {
+  return new Promise<IUSER>((resolve, reject) => {
+    const index = users.findIndex((el) => {
+      el.id === id;
+      users[index] = { id, ...user };
+    });
+    resolve(users[index]);
+  });
+};

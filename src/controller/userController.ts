@@ -8,6 +8,7 @@ import {
   create,
   findAll,
   findUserById,
+  update,
 } from '../models/userModel';
 
 export async function getUsers(
@@ -80,6 +81,55 @@ export async function createUser(
       });
       return res.end(JSON.stringify(newUser)); //end the response
     });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateUser(
+  req: IncomingMessage,
+  res: ServerResponse,
+  id: string
+) {
+  try {
+    const user = await findUserById(id);
+    if (!user) {
+      res.writeHead(404, {
+        'Content-type': 'application/json',
+      }); //write a response to the client
+      res.end(
+        JSON.stringify({
+          warning: messages.noExistId,
+        })
+      ); //end the response
+    } else {
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk.toString();
+      });
+      req.on('end', async () => {
+        const { username, hobbies, age } =
+          JSON.parse(body);
+        let userData: IUSER = {
+          username,
+          age,
+          hobbies,
+        };
+        const upgrUser = await update(
+          id,
+          userData
+        );
+        console.log(
+          'user was updated',
+          'id',
+          user.id
+        );
+        res.writeHead(200, {
+          'Content-type': 'application/json',
+        });
+        return res.end(JSON.stringify(upgrUser)); //end the response
+      });
+    }
   } catch (error) {
     console.log(error);
   }

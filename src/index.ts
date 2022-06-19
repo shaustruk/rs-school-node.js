@@ -2,6 +2,7 @@ import {
   createUser,
   getUser,
   getUsers,
+  updateUser,
 } from './controller/userController';
 import { http, messages } from './utilits';
 
@@ -22,6 +23,12 @@ const server = http.createServer((req, res) => {
     req.method === 'POST'
   ) {
     createUser(req, res);
+  } else if (
+    req.url.match(/^\/api\/users\/[\w-]+$/) &&
+    req.method === 'PUT'
+  ) {
+    const id = req.url.split('/').pop();
+    updateUser(req, res, id);
   } else {
     res.writeHead(404, {
       'Content-type': 'application/json',
